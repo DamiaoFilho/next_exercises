@@ -1,8 +1,7 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
-import Link from "next/link";
-import { Route, Info } from "lucide-react";
 import "./globals.css";
+import Nav from "@/components/nav/nav";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -26,19 +25,9 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
-      >
-        <header className="flex flex-row justify-around items-center bg-white h-10">
-          <Link href={"/"} className="flex flex-row gap-2">
-            <Route color="black"/>
-            <span className="text-black font-bold">Rotas</span>
-          </Link>
-          <nav>
-            <li className="flex flex-row items-center justify-around">
-              <ul className="text-black"><Link href={"/about"}><Info color="black"/></Link></ul>
-            </li>
-          </nav>
+      <body className={`${geistSans.variable} ${geistMono.variable}`}>
+        <header>
+          <Nav/>
         </header>
         {children}
       </body>

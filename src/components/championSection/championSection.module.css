@@ -1,0 +1,50 @@
+.cardList{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 32px;
+  max-width: 1200px;
+}
+
+.cardList img{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  border-radius: 6px;
+  gap: 32px;
+  width: 75%;
+  min-height: 500px; 
+}
+
+.cardList hr{
+  width: 75%;
+  border: 1px solid rgb(200, 170, 110);
+  border-radius: 32px;
+  margin: 6px;
+  margin-bottom: 32px;
+}
+
+.championTitle {
+  font-size: 24px;
+  font-weight: bold;
+  color: rgb(200, 170, 110);
+  text-align: center;
+}
+
+.championName{
+  width: 75%;
+  font-size: 32px;
+  font-weight: bold;
+  color: rgb(255, 255, 255);
+  text-align: center;
+  margin: auto;
+}
+
+.championLore {
+  width: 75%;
+  font-size: 16px;
+  color: rgb(200, 200, 200);
+  text-align: center;
+}
