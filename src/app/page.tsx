@@ -1,58 +1,56 @@
 "use client";
-import Image from "next/image";
-import {
-  Card,
-  CardAction,
-  CardContent,
-  CardDescription,
-  CardFooter,
-  CardHeader,
-  CardTitle,
-} from "@/components/ui/card"
-import { useUsers } from "@/services/users";
-import { Skeleton } from "@/components/ui/skeleton";
-import { Button } from "@/components/ui/button";
-import { useRouter } from 'next/navigation'
+import { useState } from "react";
+import { User } from "@/types/types";
+import SimpleForm from "@/components/SimpleForm";
+import HookZod from "@/components/HookZod";
+
+const defaultUser: User = {
+  name: "Jhon Doe",
+  email: "jhon.doe@example.com",
+  phone: "(99) 99999-9999",
+}
 
 export default function Home() {
-  const router = useRouter()
-  const { users, isLoading, mutate, error } = useUsers();
-
-  if (isLoading) {
-    return (
-      <main className="flex min-h-screen items-center justify-center bg-gray-100 p-4">
-        <div className="flex items-center space-x-4">
-          <Skeleton className="h-12 w-12 rounded-full" />
-          <div className="space-y-2">
-            <Skeleton className="h-4 w-[250px]" />
-            <Skeleton className="h-4 w-[200px]" />
-          </div>
-        </div>
-      </main>
-    );
-  }
+  const [user, setUser] = useState<User>(defaultUser);
+  const [activeForm, setActiveForm] = useState<'simple' | 'hookzod'>('simple');
 
   return (
-    <main className="flex min-h-screen items-center justify-center bg-black p-4 width-[65%]">
-      <section className="flex flex-wrap flex-row gap-4 w-full justify-center">
-        {users?.map((user) => (
-          <Card key={user.id} className="w-full max-w-sm">
-            <CardHeader>
-              <CardTitle>{user.name}</CardTitle>
-              <CardDescription>
-                {user.email}
-              </CardDescription>
-              <CardAction>
-                <Button onClick={() => router.push(`/user/${user.id}`)} className="w-full">
-                  Details
-                </Button>
-              </CardAction>
-            </CardHeader>
-            <CardContent>
-            </CardContent>
-          </Card>
-        ))}
-      </section>
+    <main className="flex w-full min-h-screen flex-row items-center justify-center">
+      <div className="w-[75%] min-h-screen flex flex-col items-center justify-center gap-4">
+        <div className="flex gap-4 mb-4">
+          <button
+            onClick={() => setActiveForm('simple')}
+            className={`px-4 py-2 rounded ${
+              activeForm === 'simple' 
+                ? 'bg-blue-500 text-white' 
+                : 'bg-gray-200 text-gray-700 hover:bg-gray-300'
+            }`}
+          >
+            Simple Form
+          </button>
+          <button
+            onClick={() => setActiveForm('hookzod')}
+            className={`px-4 py-2 rounded ${
+              activeForm === 'hookzod' 
+                ? 'bg-green-500 text-white' 
+                : 'bg-gray-200 text-gray-700 hover:bg-gray-300'
+            }`}
+          >
+            React Hook Form + Zod
+          </button>
+        </div>
+        {activeForm === 'simple' ? (
+          <SimpleForm setUser={setUser}/>
+        ) : (
+          <HookZod setUser={setUser}/>
+        )}
+      </div>
+      <div className="flex flex-col justify-center items-center w-[25%] gap-4 bg-white min-h-screen">
+        <h2 className="font-bold text-2xl m-2 text-black">User Info</h2>
+        <p className="text-black">Name: {user.name}</p>
+        <p className="text-black">Email: {user.email}</p>
+        <p className="text-black">Phone: {user.phone}</p>
+      </div>
     </main>
   );
 }
