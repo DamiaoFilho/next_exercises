@@ -13,5 +13,20 @@
             <span class="btn-text">Like</span>
         </button>
     </main>
+    
+    <script>
+        const btn = document.querySelector('.btn');
+        const img = btn.querySelector('img');
+        
+        btn.addEventListener('click', function() {
+            img.classList.remove('animate');
+            
+            img.classList.add('animate');
+        });
+        
+        img.addEventListener('animationend', function() {
+            img.classList.remove('animate');
+        });
+    </script>
 </body>
 </html>
