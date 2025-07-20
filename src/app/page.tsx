@@ -1,12 +1,9 @@
-import Image from "next/image";
-import Video from "./components/video";
+import CameraRecorder from "@/components/CameraRecorder";
 
 export default function Home() {
   return (
-    <main className="flex flex-col items-center justify-center min-h-screen w-full">
-      <div className="flex flex-col items-center justify-center w-[50%] h-[50%]">
-        <Video />
-      </div>
+    <main className="flex flex-col w-full min-h-screen bg-black items-center justify-center">
+      <CameraRecorder/>
     </main>
   );
 }
