@@ -18,7 +18,7 @@ export default function CameraRecorder(){
 
     async function getMediaStream(){
         try{
-            const stream = await navigator.mediaDevices.getUserMedia({audio: false, video:true})
+            const stream = await navigator.mediaDevices.getUserMedia({audio: true, video:true})
 
             console.log("Stream coletado")
             setPermission(true)
